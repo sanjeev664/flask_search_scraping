@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 8%;">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+            <div id="logo" class="text-center">
+                <a href="/">
+                    <h2>This is Logo</h2>
+                </a>
+                <p>Find Research outputs</p>
+            </div>
+            <form role="form" id="form-buscar" action="/results" method="POST">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input id="1" class="form-control" type="text" name="keywords" placeholder="Search..."
+                            required />
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit">
+                                <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if result %}
+<div class="container" style="margin-top: 8%;">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+            <div id="logo" class="text-center">
+                <h4>Seached Keyword: </h4>
+                <p>{{ keywords }}</p>
+            </div>
+            {% if link %}
+            {% for i in range(0, link|length) %}
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ link[i] }}">
+                        <h3 class="card-title">{{ loop.index }}.) {{ name[i] }}</h3>
+                    </a>
+                    <p>{{ details[i] }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+                <h2>Result Not Found</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock content %}
